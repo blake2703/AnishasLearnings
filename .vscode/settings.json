@@ -1,5 +1,7 @@
 {
     "files.associations": {
         "cassert": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/AVL",
+    "cmake.configureOnOpen": true
 }

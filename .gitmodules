@@ -1,0 +1,3 @@
+[submodule "HashTables/googletest"]
+	path = HashTables/googletest
+	url = https://github.com/google/googletest.git
