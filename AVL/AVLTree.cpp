@@ -51,59 +51,16 @@ Node* AVLTree::balance(Node* node) {
 
 
 void AVLTree::insert(const string& newString) {
-    // Node* curr = root;
-    // Node* parent = nullptr;
-    
-
-    // // Traverse the tree to find the correct position to insert the new node
-    // while (curr != nullptr) {
-    //     parent = curr;
-    //     if (newString < curr->getWord()) {
-    //         curr = curr->getLeft();
-    //     } else if (newString > curr->getWord()) {
-    //         curr = curr->getRight();
-    //     } else {
-    //         // If the string already exists in the tree, just increment the node's count and return
-    //         curr->setCount(curr->getCount() + 1);
-    //         return;
-    //     }
-    // }
-    // // Create a new node and set its word and count
-    // Node* newNode = new Node();
-    // newNode->setWord(newString);
-    // newNode->setCount(1);
-
-    // // Set the new node's parent and insert it into the correct position
-    // newNode->setParent(parent);
-    // if (root == nullptr) {
-    //     root = newNode;
-    // } else if (newString < parent->getWord()) {
-    //     parent->setLeft(newNode);
-    //     root = balance(root);
-    // } else if (newString > parent->getWord()) {
-    //     parent->setRight(newNode);
-    //     root = balance(root);
-    // } 
-    // else {
-    //     return;
-    // }
-
-    // //find nearest unbalanced node and rotate if needed 
-    // Node *unbalancedNode = findUnbalancedNode(newNode);
-    // //if no unbalanced node, simply return;
-    // if(unbalancedNode == nullptr) {
-    //     return;
-    // }
     root = insertRec(root, newString);
 }
 
 Node* AVLTree::insertRec(Node* node, string val) {
+   // node->setCount(node->getCount() + 1);
     if(node == nullptr) {
         node = new Node();
         node->setWord(val);
         node->setLeft(nullptr);
         node->setRight(nullptr);
-        node->setCount(1);
         return node;
     }
     else if (val < node->getWord()) {
@@ -216,6 +173,7 @@ Node* AVLTree::findUnbalancedNode(Node* newNode) {
 //print function 
 void AVLTree::printBalanceFactors() {
     printBalanceFactors(root);
+    cout << endl;
 }
 
 //helper function
