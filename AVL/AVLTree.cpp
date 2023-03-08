@@ -55,6 +55,10 @@ void AVLTree::insert(const string& newString) {
 }
 
 Node* AVLTree::insertRec(Node* node, string val) {
+    if (search(val)) {
+        node->setCount(node->getCount() + 1);
+        return node;
+    }
    // node->setCount(node->getCount() + 1);
     if(node == nullptr) {
         node = new Node();
@@ -77,10 +81,28 @@ Node* AVLTree::insertRec(Node* node, string val) {
     return node;
 }
 
+bool AVLTree::search(const string& key) const {
+    if (root == nullptr) {
+        return false; // tree is empty, so we return false 
+    }
+    Node* curr = root;
+    while (curr != nullptr) {
+        if (key == curr->getWord()) {
+            return true; // found 
+        }
+        else if (key < curr->getWord()) {
+            curr = curr->getLeft();
+        }
+        else {
+            curr = curr->getRight();
+        }
+    }
+    return false; //not found 
+}
 //takes in the unbalanced node, which is the root of the subtree
-void rotate(Node* node) {
+// void rotate(Node* node) {
    
-} 
+// } 
 
 Node* AVLTree::rotateRightRight(Node* node) {
     Node* temp = node->getRight();

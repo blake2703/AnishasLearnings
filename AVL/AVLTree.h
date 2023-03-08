@@ -18,6 +18,7 @@ class AVLTree {
     Node* rotateLeftLeft(Node* node);
     void printBalanceFactors(Node *userNode);
     void visualizeTree(ofstream &, Node *);
+    bool search(const string &key) const;
 
 
     //destructor helper function

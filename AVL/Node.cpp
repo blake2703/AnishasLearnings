@@ -13,13 +13,36 @@ Node::Node() {
     bFactor = 0;
     count = 0;
 }
-//getters
+ /*
+    *   Retrieves the string associated with the node 
+    *   Params:
+    *       None
+    * 
+    *   Return:
+    *       word
+*/
 string Node::getWord() {
     return word;
 }
+ /*
+    *   Retrieves the left child of the node  
+    *   Params:
+    *       None
+    * 
+    *   Return:
+    *       left child 
+*/
 Node* Node::getLeft() {
     return left;
 }
+ /*
+    *   Reetrieves the string associated with the nod 
+    *   Params:
+    *       None
+    * 
+    *   Return:
+    *       right child 
+*/
 Node* Node::getRight(){
     return right;
 }
