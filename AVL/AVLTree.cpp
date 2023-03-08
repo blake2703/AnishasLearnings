@@ -31,7 +31,7 @@ void AVLTree::deleteTree(Node *userNode) {
 Node* AVLTree::balance(Node* node) {
     int balance_factor = getBalanceFactor(node);
     if(balance_factor > 1) {
-        if(getBalanceFactor(node->getLeft()) > 0) {
+        if(getBalanceFactor(node->getLeft()) > 1) {
             node = rotateLeftLeft(node);
         }
         else {
@@ -39,7 +39,7 @@ Node* AVLTree::balance(Node* node) {
         }
     }
     else if (balance_factor < -1) {
-        if(getBalanceFactor(node->getRight()) > 0) {
+        if(getBalanceFactor(node->getRight()) > 1) {
             node = rotateRightLeft(node);
         }
         else {
