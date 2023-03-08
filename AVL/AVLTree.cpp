@@ -31,15 +31,15 @@ void AVLTree::deleteTree(Node *userNode) {
 Node* AVLTree::balance(Node* node) {
     int balance_factor = getBalanceFactor(node);
     if(balance_factor > 1) {
-        if(getBalanceFactor(node->getLeft()) > 1) {
+        if(getBalanceFactor(node->getLeft()) > 0) {
             node = rotateLeftLeft(node);
         }
         else {
             node = rotateLeftRight(node);
         }
     }
-    else if (balance_factor < -1) {
-        if(getBalanceFactor(node->getRight()) > 1) {
+    else if(balance_factor < -1) {
+        if(getBalanceFactor(node->getRight()) > 0) {
             node = rotateRightLeft(node);
         }
         else {
@@ -51,46 +51,73 @@ Node* AVLTree::balance(Node* node) {
 
 
 void AVLTree::insert(const string& newString) {
-    Node* curr = root;
-    Node* parent = nullptr;
+    // Node* curr = root;
+    // Node* parent = nullptr;
     
 
-    // Traverse the tree to find the correct position to insert the new node
-    while (curr != nullptr) {
-        parent = curr;
-        if (newString < curr->getWord()) {
-            curr = curr->getLeft();
-        } else if (newString > curr->getWord()) {
-            curr = curr->getRight();
-        } else {
-            // If the string already exists in the tree, just increment the node's count and return
-            curr->setCount(curr->getCount() + 1);
-            return;
-        }
-    }
-    // Create a new node and set its word and count
-    Node* newNode = new Node();
-    newNode->setWord(newString);
-    newNode->setCount(1);
+    // // Traverse the tree to find the correct position to insert the new node
+    // while (curr != nullptr) {
+    //     parent = curr;
+    //     if (newString < curr->getWord()) {
+    //         curr = curr->getLeft();
+    //     } else if (newString > curr->getWord()) {
+    //         curr = curr->getRight();
+    //     } else {
+    //         // If the string already exists in the tree, just increment the node's count and return
+    //         curr->setCount(curr->getCount() + 1);
+    //         return;
+    //     }
+    // }
+    // // Create a new node and set its word and count
+    // Node* newNode = new Node();
+    // newNode->setWord(newString);
+    // newNode->setCount(1);
 
-    // Set the new node's parent and insert it into the correct position
-    newNode->setParent(parent);
-    if (parent == nullptr) {
-        root = newNode;
-    } else if (newString < parent->getWord()) {
-        parent->setLeft(newNode);
-        root = balance(root);
-    } else {
-        parent->setRight(newNode);
-        root = balance(root);
-    } 
+    // // Set the new node's parent and insert it into the correct position
+    // newNode->setParent(parent);
+    // if (root == nullptr) {
+    //     root = newNode;
+    // } else if (newString < parent->getWord()) {
+    //     parent->setLeft(newNode);
+    //     root = balance(root);
+    // } else if (newString > parent->getWord()) {
+    //     parent->setRight(newNode);
+    //     root = balance(root);
+    // } 
+    // else {
+    //     return;
+    // }
 
-    //find nearest unbalanced node and rotate if needed 
-    Node *unbalancedNode = findUnbalancedNode(newNode);
-    //if no unbalanced node, simply return;
-    if (unbalancedNode == nullptr) {
-        return;
+    // //find nearest unbalanced node and rotate if needed 
+    // Node *unbalancedNode = findUnbalancedNode(newNode);
+    // //if no unbalanced node, simply return;
+    // if(unbalancedNode == nullptr) {
+    //     return;
+    // }
+    root = insertRec(root, newString);
+}
+
+Node* AVLTree::insertRec(Node* node, string val) {
+    if(node == nullptr) {
+        node = new Node();
+        node->setWord(val);
+        node->setLeft(nullptr);
+        node->setRight(nullptr);
+        node->setCount(1);
+        return node;
     }
+    else if (val < node->getWord()) {
+        node->setLeft(insertRec(node->getLeft(), val));
+        node = balance(node);
+    }
+    else if(val >= node->getWord()) {
+        node->setRight(insertRec(node->getRight(), val));
+        node = balance(node);
+    }
+    else {
+        return node;
+    }
+    return node;
 }
 
 //takes in the unbalanced node, which is the root of the subtree

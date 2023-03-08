@@ -45,5 +45,7 @@ class AVLTree {
     void preOrder() const;
 
     Node* balance(Node* node);
+    Node* insertRec(Node* node, string val);
+
 
 };
