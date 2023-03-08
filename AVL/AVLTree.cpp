@@ -38,7 +38,7 @@ Node* AVLTree::balance(Node* node) {
             node = rotateLeftRight(node);
         }
     }
-    else if (balance_factor < 1) {
+    else if (balance_factor < -1) {
         if(getBalanceFactor(node->getRight()) > 0) {
             node = rotateRightLeft(node);
         }
